@@ -27,4 +27,13 @@ public class ShowSliderValue : MonoBehaviour
 			lbl.text = QualitySettings.names[level];
 		}
 	}
+
+
+	public void UpdateMaxPlayerLabel(float value){
+		Text lbl = GetComponent<Text>();
+		if (lbl != null){
+			int players = (int)value;
+			lbl.text = players + " Players";
+		}
+	}
 }

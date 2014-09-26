@@ -8,9 +8,10 @@ public class MenuManager : MonoBehaviour {
 	public List<GameObject> menus = new List<GameObject>();
 	private GameObject curMenu;
 	private Text title;
-
+	
 	// Use this for initialization
 	void Start () {
+
 		title = GameObject.FindGameObjectWithTag ("MenuTitle").GetComponent<Text>();
 		curMenu = menus[0];
 		title.text = curMenu.name.ToUpper();
@@ -42,4 +43,5 @@ public class MenuManager : MonoBehaviour {
 	public void Quit(){
 		Application.Quit();
 	}
+	
 }

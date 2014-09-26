@@ -16,6 +16,15 @@ public class GraphicsManager : MonoBehaviour {
 
 
 	void Awake () {
+		if(ResolutionSlider == null){
+			Debug.LogError ("Add ResolutionSlider GraphicsManager Variable");
+		} 
+		if(ResolutionSlider == null){
+			Debug.LogError ("Add ResolutionSlider GraphicsManager Variable");
+		}
+		if(QualitySlider == null){
+			Debug.LogError ("Add QualitySlider GraphicsManager Variable");
+		}
 
 		fullscreen = PlayerPrefs.HasKey("fullscreen") ? bool.Parse(PlayerPrefs.GetString("fullscreen")) : defFullscreen;
 		FullScreenToggle.GetComponent<Toggle>().isOn = fullscreen;
@@ -30,6 +39,7 @@ public class GraphicsManager : MonoBehaviour {
 		int level = PlayerPrefs.HasKey("qualityLevel") ? PlayerPrefs.GetInt("qualityLevel") : defQualityLevel;
 		QualitySlider.GetComponent<Slider>().value = level;
 		QualitySettings.SetQualityLevel(level, true);
+		
 
 
 	}
