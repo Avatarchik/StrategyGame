@@ -7,13 +7,20 @@ public class GraphicsManager : MonoBehaviour {
 	//Graphics Settings
 	private const int defQualityLevel = 3;
 	private int defResolutionIndex;
-	private bool fullscreen = false;
+	private bool defFullscreen = true;
+	private bool fullscreen;
 
 	public GameObject ResolutionSlider;
 	public GameObject QualitySlider; 
+	public GameObject FullScreenToggle;
 
 
 	void Awake () {
+
+		fullscreen = PlayerPrefs.HasKey("fullscreen") ? bool.Parse(PlayerPrefs.GetString("fullscreen")) : defFullscreen;
+		FullScreenToggle.GetComponent<Toggle>().isOn = fullscreen;
+		Screen.fullScreen = fullscreen;
+
 		defResolutionIndex = Screen.resolutions.Length - 1;
 		ResolutionSlider.GetComponent<Slider>().maxValue = Screen.resolutions.Length - 1;
 		int resIndex = PlayerPrefs.HasKey("resolutionIndex") ? PlayerPrefs.GetInt("resolutionIndex") : defResolutionIndex;
@@ -24,6 +31,7 @@ public class GraphicsManager : MonoBehaviour {
 		QualitySlider.GetComponent<Slider>().value = level;
 		QualitySettings.SetQualityLevel(level, true);
 
+
 	}
 	
 	private void SetQualityLevel(){
@@ -31,6 +39,15 @@ public class GraphicsManager : MonoBehaviour {
 			int level = (int)QualitySlider.GetComponent<Slider>().value;
 			PlayerPrefs.SetInt("qualityLevel", level);
 			QualitySettings.SetQualityLevel(level, true);
+		}
+	}
+
+	private void SetFullscreen(){
+		if(GameObject.Find (FullScreenToggle.name) != null){
+			bool state = FullScreenToggle.GetComponent<Toggle>().isOn;
+			PlayerPrefs.SetString("fullscreen", state.ToString());
+			fullscreen = state;
+			Screen.fullScreen = fullscreen;
 		}
 	}
 
@@ -43,8 +60,11 @@ public class GraphicsManager : MonoBehaviour {
 		}
 	}
 
+
+
 	public void SaveAll(){
 		SetQualityLevel();
+		SetFullscreen();
 		SetResolution();
 	}
 }

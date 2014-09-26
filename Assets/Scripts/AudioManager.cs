@@ -4,7 +4,7 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour {
 	//Audio Settings
-	private const float defaultVolume = 1;
+	private const float defaultVolume = 0.5f;
 	
 	public GameObject SoundVolumeSlider;
 	public GameObject MusicVolumeSlider;
