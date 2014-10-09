@@ -22,8 +22,7 @@ public class LevelManager : MonoBehaviour {
 	//Holds the last level's prefix (needs to be incremented when we change the level)
 	private int lastLevelPrefix = 0;
 	
-	//Used to store a relation to the MenuManager script
-	private MenuManager menuManager;
+
 
 	//Map Selection
 	public Text mapSelectionValue;
@@ -43,12 +42,7 @@ public class LevelManager : MonoBehaviour {
 
 	}
 	
-	// Use this for initialization
-	void Start () {
-		menuManager = GameObject.Find("Menu").GetComponent<MenuManager>();
-	}
-	
-	
+
 	[RPC]
 	//Used to load the map on a client accross the network
 	void Client_LoadMap(int mIndex, int levelPrefix){
@@ -90,16 +84,11 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 	
-	
-	//Fires when the player or the server disconnects from the network
-	void OnDisconnectedFromServer ()
+	//Is Fired in ConnectionManager when the player or the server disconnects from the network
+	public void PlayerHasDisconnected ()
 	{
 		//Load the startlevel/mainlevel
 		Application.LoadLevel(mainlevel);
-		
-		//Switch the menu back
-		menuManager.NavigateTo("Main");
-		
 	}
 
 	public void SelectNextMap(){
