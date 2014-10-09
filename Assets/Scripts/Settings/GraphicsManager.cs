@@ -16,10 +16,15 @@ public class GraphicsManager : MonoBehaviour {
 
 
 	void Awake () {
-		if(ResolutionSlider == null) Debug.LogError ("Add ResolutionSlider GraphicsManager Variable");
-
-		if(ResolutionSlider == null) Debug.LogError ("Add ResolutionSlider GraphicsManager Variable");
-		if(QualitySlider == null) Debug.LogError ("Add QualitySlider GraphicsManager Variable");
+		if(ResolutionSlider == null){
+			Debug.LogError ("Add ResolutionSlider GraphicsManager Variable");
+		} 
+		if(ResolutionSlider == null){
+			Debug.LogError ("Add ResolutionSlider GraphicsManager Variable");
+		}
+		if(QualitySlider == null){
+			Debug.LogError ("Add QualitySlider GraphicsManager Variable");
+		}
 
 		fullscreen = PlayerPrefs.HasKey("fullscreen") ? bool.Parse(PlayerPrefs.GetString("fullscreen")) : defFullscreen;
 		FullScreenToggle.GetComponent<Toggle>().isOn = fullscreen;
@@ -27,13 +32,7 @@ public class GraphicsManager : MonoBehaviour {
 
 		defResolutionIndex = Screen.resolutions.Length - 1;
 		ResolutionSlider.GetComponent<Slider>().maxValue = Screen.resolutions.Length - 1;
-
 		int resIndex = PlayerPrefs.HasKey("resolutionIndex") ? PlayerPrefs.GetInt("resolutionIndex") : defResolutionIndex;
-
-		if(resIndex >= Screen.resolutions.Length){
-			resIndex = 0;
-		}
-
 		ResolutionSlider.GetComponent<Slider>().value = resIndex;
 		Screen.SetResolution (Screen.resolutions[resIndex].width, Screen.resolutions[resIndex].height, fullscreen);
 
