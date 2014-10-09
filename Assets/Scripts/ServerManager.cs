@@ -42,6 +42,7 @@ public class ServerManager : MonoBehaviour {
 
 	public void StartServer(){
 		if(isPublic){
+			Debug.LogWarning(isPublic.ToString());
 			Network.InitializeServer(maxPlayers, port, !Network.HavePublicAddress());
 			MasterServer.RegisterHost(gameKey, serverName);
 		} else {
